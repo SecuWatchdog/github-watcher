@@ -29,7 +29,7 @@ Follow these steps to set up and run the GitHub Anomaly Detection Tool:
 pip install -r requirements.txt
 ```
 
-3. Configure the application to receive GitHub webhook events locally using one of the recommended tools (smee.io or
+3. Configure the application to receive GitHub webhook events locally (at /webhook) using one of the recommended tools (smee.io or
    ngrok).
 
 ## Usage
