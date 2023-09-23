@@ -1,0 +1,9 @@
+detectors:
+  - name: push_detector
+    enabled: true
+    schedule:
+      start_time: "14:00"
+      end_time: "16:00"
+  - name: deletion_detector
+    enabled: true
+    max_time_difference: 10

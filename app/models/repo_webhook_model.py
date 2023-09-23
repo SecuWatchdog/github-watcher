@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from app.models.owner_model import GitHubOwner
+from app.models.organization_model import GitHubOrganization
 from app.models.repository_model import GitHubRepository
 from app.models.sender_model import GitHubSender
 
@@ -8,5 +8,5 @@ from app.models.sender_model import GitHubSender
 class RepoWebhookEvent(BaseModel):
     action: str
     repository: GitHubRepository
-    organization: GitHubOwner
+    organization: GitHubOrganization
     sender: GitHubSender

@@ -1,4 +1,6 @@
-from pydantic import BaseModel
+from typing import List, Optional, Union
+
+from pydantic import HttpUrl, BaseModel
 
 from app.models.owner_model import GitHubOwner
 
@@ -10,58 +12,58 @@ class GitHubRepository(BaseModel):
     full_name: str
     private: bool
     owner: GitHubOwner
-    html_url: str
-    description: str = None
+    html_url: HttpUrl
+    description: Optional[str] = None
     fork: bool
-    url: str
-    forks_url: str
-    keys_url: str
-    collaborators_url: str
-    teams_url: str
-    hooks_url: str
-    issue_events_url: str
-    events_url: str
-    assignees_url: str
-    branches_url: str
-    tags_url: str
-    blobs_url: str
-    git_tags_url: str
-    git_refs_url: str
-    trees_url: str
-    statuses_url: str
-    languages_url: str
-    stargazers_url: str
-    contributors_url: str
-    subscribers_url: str
-    subscription_url: str
-    commits_url: str
-    git_commits_url: str
-    comments_url: str
-    issue_comment_url: str
-    contents_url: str
-    compare_url: str
-    merges_url: str
-    archive_url: str
-    downloads_url: str
-    issues_url: str
-    pulls_url: str
-    milestones_url: str
-    notifications_url: str
-    labels_url: str
-    releases_url: str
-    deployments_url: str
-    created_at: str
+    url: HttpUrl
+    forks_url: HttpUrl
+    keys_url: HttpUrl
+    collaborators_url: HttpUrl
+    teams_url: HttpUrl
+    hooks_url: HttpUrl
+    issue_events_url: HttpUrl
+    events_url: HttpUrl
+    assignees_url: HttpUrl
+    branches_url: HttpUrl
+    tags_url: HttpUrl
+    blobs_url: HttpUrl
+    git_tags_url: HttpUrl
+    git_refs_url: HttpUrl
+    trees_url: HttpUrl
+    statuses_url: HttpUrl
+    languages_url: HttpUrl
+    stargazers_url: HttpUrl
+    contributors_url: HttpUrl
+    subscribers_url: HttpUrl
+    subscription_url: HttpUrl
+    commits_url: HttpUrl
+    git_commits_url: HttpUrl
+    comments_url: HttpUrl
+    issue_comment_url: HttpUrl
+    contents_url: HttpUrl
+    compare_url: HttpUrl
+    merges_url: HttpUrl
+    archive_url: HttpUrl
+    downloads_url: HttpUrl
+    issues_url: HttpUrl
+    pulls_url: HttpUrl
+    milestones_url: HttpUrl
+    notifications_url: HttpUrl
+    labels_url: HttpUrl
+    releases_url: HttpUrl
+    deployments_url: HttpUrl
+    created_at: Optional[Union[int, str]]
     updated_at: str
-    pushed_at: str
+    pushed_at: Optional[Union[int, str]]
     git_url: str
     ssh_url: str
-    clone_url: str
-    svn_url: str
-    homepage: str = None
+    clone_url: HttpUrl
+    svn_url: HttpUrl
+    homepage: Optional[HttpUrl] = None
     size: int
     stargazers_count: int
     watchers_count: int
-    language: str = None
+    language: Optional[str] = None
     has_issues: bool
     has_projects: bool
     has_downloads: bool
@@ -69,17 +71,19 @@ class GitHubRepository(BaseModel):
     has_pages: bool
     has_discussions: bool
     forks_count: int
-    mirror_url: str = None
+    mirror_url: Optional[HttpUrl] = None
     archived: bool
     disabled: bool
     open_issues_count: int
-    license: str = None
+    license: Optional[str] = None
     allow_forking: bool
     is_template: bool
     web_commit_signoff_required: bool
-    topics: list = []
+    topics: List[str] = []
     visibility: str
     forks: int
     open_issues: int
     watchers: int
     default_branch: str
+    stargazers: Optional[int] = None
+    master_branch: Optional[str] = None

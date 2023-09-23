@@ -1,22 +1,26 @@
-from pydantic import BaseModel
+from typing import Optional
+
+from pydantic import BaseModel, HttpUrl, EmailStr
 
 
 class GitHubOwner(BaseModel):
+    name: Optional[str] = ""
+    email: Optional[EmailStr] = None
     login: str
     id: int
     node_id: str
-    avatar_url: str
-    gravatar_id: str
-    url: str
+    avatar_url: HttpUrl
+    gravatar_id: Optional[str] = ""
+    url: HttpUrl
     html_url: str
-    followers_url: str
-    following_url: str
-    gists_url: str
-    starred_url: str
-    subscriptions_url: str
-    organizations_url: str
-    repos_url: str
-    events_url: str
-    received_events_url: str
+    followers_url: HttpUrl
+    following_url: HttpUrl
+    gists_url: HttpUrl
+    starred_url: HttpUrl
+    subscriptions_url: HttpUrl
+    organizations_url: HttpUrl
+    repos_url: HttpUrl
+    events_url: HttpUrl
+    received_events_url: HttpUrl
     type: str
     site_admin: bool

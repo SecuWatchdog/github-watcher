@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -6,7 +8,7 @@ class GitHubSender(BaseModel):
     id: int
     node_id: str
     avatar_url: str
-    gravatar_id: str
+    gravatar_id: Optional[str]
     url: str
     html_url: str
     followers_url: str
