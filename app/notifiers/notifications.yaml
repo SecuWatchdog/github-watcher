@@ -4,4 +4,4 @@ notifications:
   repo-deleted:
     message: "Repository deleted after less than 10 minutes, there might be a security breach!"
   push-bad-time:
-    message: "Push has been between 14:00 and 16:00 there might be a security breach!"
+    message: "Push has been made between 14:00 and 16:00, there might be a security breach!"
