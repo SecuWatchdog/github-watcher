@@ -11,7 +11,7 @@ The application identifies the following suspicious behaviors:
 1. **Pushing Code Between 14:00-16:00**: The tool checks if code is pushed to repositories within the specified time
    frame (2:00 PM to 4:00 PM).
 
-2. **Creating a Team with the Prefix "hacker"**: It monitors the creation of teams and flags those with names starting
+2. **Creating a Team with the Prefix "hacker"**: It monitors the creation of teams created with the prefix "hacker"
    with "hacker."
 
 3. **Creating and Deleting a Repository in Less Than 10 Minutes**: The tool tracks the creation and deletion of
