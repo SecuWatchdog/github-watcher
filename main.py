@@ -6,7 +6,7 @@ from app.notifiers.notification_manager import NotificationManager
 
 app = FastAPI()
 
-app.include_router(webhook_router, tags=["team events"])
+app.include_router(webhook_router)
 
 if __name__ == '__main__':
     NotificationManager().add_notification_service(LogNotifier("logs.txt"))

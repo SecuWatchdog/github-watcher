@@ -1,8 +1,10 @@
-from fastapi import APIRouter, Depends
+from typing import Union
 
-from app.detectors.push_detector import is_bad_push_time
-from app.detectors.repo_detector import is_repository_live_time_is_valid
-from app.detectors.team_detector import is_hacker_team
+from fastapi import APIRouter, Depends, Header
+
+from app.detectors.push_detector import PushDetector
+from app.detectors.repo_detector import RepoDetector
+from app.detectors.team_detector import TeamDetector
 from app.models.push_webhook_model import PushWebhookEvent
 from app.models.repo_webhook_model import RepoWebhookEvent
 from app.models.team_webhook_model import TeamWebhookEvent
@@ -11,23 +13,21 @@ from app.notifiers.notification_manager import NotificationManager
 router = APIRouter()
 notification_manager = NotificationManager()
 
-
-@router.post('/team')
-async def handle_team_webhook(payload: TeamWebhookEvent, notification_manager: NotificationManager = Depends()):
-    if is_hacker_team(payload):
-        notification_manager.notify_all("team-hack")
-    return 202
-
-
-@router.post('/repo')
-async def handle_repo_webhook(payload: RepoWebhookEvent, notification_manager: NotificationManager = Depends()):
-    if is_repository_live_time_is_valid(payload):
-        notification_manager.notify_all("repo-deleted")
-    return 202
+detectors = {
+    'team': (TeamDetector("team-hack"),),
+    'repository': (RepoDetector("repo-deleted"),),
+    'push': (PushDetector("push-bad-time"),),
+}
 
 
-@router.post('/push')
-async def handle_push_webhook(payload: PushWebhookEvent, notification_manager: NotificationManager = Depends()):
-    if is_bad_push_time(payload):
-        notification_manager.notify_all("push-bad-time")
+@router.post("/webhook")
+async def handle_webhook(payload: Union[TeamWebhookEvent, RepoWebhookEvent, PushWebhookEvent],
+                         x_github_event: str = Header(None),
+                         notification_manager: NotificationManager = Depends()):
+    selected_detectors = detectors.get(x_github_event, ())
+
+    for detector in selected_detectors:
+        if detector.detect(payload):
+            notification_manager.notify_all(detector.name)
+
     return 202
