@@ -1,6 +1,7 @@
 from typing import Union
 
 from fastapi import APIRouter, Depends, Header
+from starlette.responses import JSONResponse
 
 from app.detectors.push_detector import PushDetector
 from app.detectors.repo_detector import RepoDetector
@@ -30,4 +31,4 @@ async def handle_webhook(payload: Union[TeamWebhookEvent, RepoWebhookEvent, Push
         if detector.detect(payload):
             notification_manager.notify_all(detector.name)
 
-    return 202
+    return JSONResponse(content={}, status_code=202)
